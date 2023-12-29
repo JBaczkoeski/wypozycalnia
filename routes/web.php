@@ -46,3 +46,7 @@ Route::get('/admin/samochody', [CarsController::class, 'carsList'])->name('carsL
 Route::get('admin/samochody/dodawanie', [CarsController::class, 'create'])->name('admin.create.car');
 Route::get('admin/samochody/marki', [CarsController::class, 'brands'])->name('admin.create.brand');
 Route::post('admin/samochody/marki/dodaj', [CarsController::class, 'storeBrand'])->name('admin.store.brand');
+Route::delete('admin/samochody/marki/usun/{id}', [CarsController::class, 'deleteBrand'])->name('admin.delete.brand');
+Route::post('admin/samochody/samochody/dodaj', [CarsController::class, 'storeCar'])->name('admin.car.store.brand');
+
+

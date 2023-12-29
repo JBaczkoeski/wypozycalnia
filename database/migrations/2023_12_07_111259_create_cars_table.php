@@ -16,6 +16,8 @@ class CreateCarsTable extends Migration
             $table->string('registration_number');
             $table->integer('price_per_day');
             $table->enum('type', ['SUV', 'sedan', 'sportowy', 'dostawczy']);
+            $table->enum('fuel', ['diesel', 'benzyna']);
+            $table->enum('transmission', ['manualna', 'automatyczna']);
             $table->boolean('availability')->default(true);
             $table->timestamps();
 
