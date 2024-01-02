@@ -18,7 +18,7 @@
                                 <i class="fa-solid fa-road fa-lg"></i>
                             </div>
                             <div class="container col-12">
-                                <p class="h6">259 KM</p>
+                                <p class="h6">{{$car['power']}} KM</p>
                             </div>
                         </div>
                         <div class="container col-12 d-flex justify-content-end">
@@ -40,10 +40,16 @@
                     </div>
                     <div class="container row mt-3">
                         <div class="container col-7 ms-1">
-                            <p class="h5 text-danger">{{$car['price_per_day']}}/dzień</p>
+                            <p class="h5 text-danger">{{$car['price_per_day']}} zł/dzień</p>
                         </div>
-                        <div class="container col-3">
-                            <button class="btn btn-success" style="margin-left: -25px">Wynajmij</button>
+                        <div class="container col-12">
+                            <a class="btn btn-warning">Edytuj</a>
+                            <a class="btn btn-danger">Usuń</a>
+                            @if ($car['availability'] == 1)
+                                <a href="/admin/samochody/zawies/{{$car['id']}}" class="btn btn-info">Zawieś</a>
+                            @else
+                                <a href="/admin/samochody/zawies/{{$car['id']}}" class="btn btn-info">Wznów</a>
+                            @endif
                         </div>
                     </div>
                 </div>

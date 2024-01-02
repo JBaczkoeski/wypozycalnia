@@ -74,6 +74,19 @@ class CarsController extends Controller
         }
     }
 
+    public function carAvability($id){
+        $car = Car::find($id);
+        if($car){
+            if($car->availability == 0) {
+                $car->availability = 1;
+            }else{
+                $car->availability = 0;
+            }
+            $car->save();
+        }
+        return redirect()->back();
+    }
+
     public function deleteBrand($id)
     {
         $brand = brand::find($id);
