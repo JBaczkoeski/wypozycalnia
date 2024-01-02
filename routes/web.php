@@ -42,7 +42,7 @@ Route::get('/admin', function(){
     return view('admin.home');
 });
 
-Route::get('/admin/samochody', [CarsController::class, 'carsList'])->name('carsList');;
+Route::get('/admin/samochody', [CarsController::class, 'index'])->name('carsList');;
 Route::get('admin/samochody/dodawanie', [CarsController::class, 'create'])->name('admin.create.car');
 Route::get('admin/samochody/marki', [CarsController::class, 'brands'])->name('admin.create.brand');
 Route::post('admin/samochody/marki/dodaj', [CarsController::class, 'storeBrand'])->name('admin.store.brand');

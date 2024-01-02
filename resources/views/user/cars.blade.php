@@ -7,7 +7,6 @@
             </div>
             <div class="container col-10 mt-3">
                 <div class="row">
-                    {{$cars}}
                     @foreach($cars as $car)
 
                         <div class="container col-3 row border border-3 rounded py-3 m-3 shadow-lg">

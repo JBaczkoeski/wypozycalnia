@@ -15,6 +15,7 @@ class Car extends Model
         'year',
         'registration_number',
         'price_per_day',
+        'power',
         'type',
         'availability',
         'fuel',

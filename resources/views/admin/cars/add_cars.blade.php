@@ -35,6 +35,10 @@
                     @if($errors->first('price_per_day'))
                         <p class="text-danger">{{ $errors->first('price_per_day') }}</p>
                     @endif
+                    <input name="power" type="number" class="form-control mt-3" placeholder="Moc">
+                @if($errors->first('power'))
+                        <p class="text-danger">{{ $errors->first('power') }}</p>
+                    @endif
                     <select name="type" class="form-control mt-3">
                         <option selected disabled>Typ</option>
                         <option value="SUV">Suv</option>

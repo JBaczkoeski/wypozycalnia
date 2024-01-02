@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Car;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -11,17 +12,18 @@ class CarsController extends Controller
 {
     public function index()
     {
-        $cars = Car::select('id', 'brand_id', 'model', 'year', 'registration_number', 'price_per_day','fuel', 'transmission', 'type', 'availability', 'created_at', 'updated_at')
+        $cars = Car::select('id', 'brand_id', 'model', 'year', 'registration_number', 'power','price_per_day','fuel', 'transmission', 'type', 'availability', 'created_at', 'updated_at')
             ->with('brand:id,name')
             ->get()
             ->map(function ($car) {
                 return [
                     'id' => $car->id,
-                    'brand_name' => $car->brand ? $car->brand->name : null, // Wybiera nazwę marki lub null, jeśli nie ma powiązanej marki
+                    'brand_name' => $car->brand ? $car->brand->name : null,
                     'model' => $car->model,
                     'year' => $car->year,
                     'registration_number' => $car->registration_number,
                     'price_per_day' => $car->price_per_day,
+                    'power' => $car->power,
                     'type' => $car->type,
                     'transmission'=>$car->transmission,
                     'fuel' => $car->fuel,
@@ -30,13 +32,13 @@ class CarsController extends Controller
                     'updated_at' => $car->updated_at,
                 ];
             });
+        $user = User::get()->only('role');
 
-        return view('user.cars', ['cars' => $cars]);
-    }
-
-    public function carsList()
-    {
-        return view('admin.cars.cars');
+        if ($user == 'user') {
+            return view('user.cars', ['cars' => $cars]);
+        }else{
+            return view('admin.cars.cars', ['cars' => $cars]);
+        }
     }
 
     public function create()
@@ -87,6 +89,7 @@ class CarsController extends Controller
             'model' => 'string',
             'registration_number' => 'string|max:7|min:5',
             'price_per_day' => 'numeric',
+            'power' => 'numeric',
             'type' => 'string',
         ]);
 
@@ -101,6 +104,7 @@ class CarsController extends Controller
             $car->year = $request->input('year');
             $car->registration_number = $request->input('registration_number');
             $car->price_per_day = $request->input('price_per_day');
+            $car->power = $request->input('power');
             $car->type = $request->input('type');
             $car->fuel = $request->input('fuel');
             $car->transmission = $request->input('transmission');
