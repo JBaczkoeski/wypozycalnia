@@ -6,7 +6,10 @@
             @foreach($cars as $car)
                 <div class="container col-3 row border border-3 rounded py-3 m-3 shadow-lg">
                     <div class="container">
-                        <img class="img-fluid rounded shadow-lg" src="{{ asset('/images/cars/Audi7.jpg') }}"
+                        @if($car['availability'] == 0)
+                            <h3 class="text-center text-danger">Zawieszony</h3>
+                        @endif
+                        <img class="img-fluid rounded shadow-lg" src="{{ Storage::url($car['img']) }}"
                              alt="car">
                     </div>
                     <div class="container text-center h5 my-3">
@@ -44,7 +47,7 @@
                         </div>
                         <div class="container col-12">
                             <a class="btn btn-warning">Edytuj</a>
-                            <a class="btn btn-danger">Usuń</a>
+                            <a href="/admin/samochody/usun/{{$car['id']}}" class="btn btn-danger">Usuń</a>
                             @if ($car['availability'] == 1)
                                 <a href="/admin/samochody/zawies/{{$car['id']}}" class="btn btn-info">Zawieś</a>
                             @else

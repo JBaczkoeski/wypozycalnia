@@ -39,7 +39,7 @@
                     <a class="btn @if(Request::is('samochody')) active @endif fw-bold text-white" href="/samochody">Samochody</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn @if(Request::is('informacje')) active @endif fw-bold text-white" href="/informacje">Informacje</a>
+                    <a class="btn @if(Request::is('informacja')) active @endif fw-bold text-white" href="/informacja">Informacje</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn @if(Request::is('kontakt')) active @endif fw-bold text-white"

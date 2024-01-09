@@ -2,6 +2,10 @@
 
 namespace App\Console;
 
+use App\Models\Car;
+use App\Models\Rental;
+use Carbon\Carbon;
+use DB;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -12,7 +16,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function (){
+            $expiriedReservation = Rental::whereDate('return_date', '<', Carbon::now());
+
+            $carToUpdate = $expiriedReservation->pluck('car_id');
+
+            DB::table('cars')
+                ->whereIn('id', $carToUpdate)
+                ->update(['availability' => 1]);
+        })->dailyAt('10:45');
     }
 
     /**

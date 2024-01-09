@@ -3,7 +3,7 @@
     @include('includes.admin_cars_sidebar')
     <div class="container col-6 border border-3 mt-5 p-3">
         <div class="row">
-            <form method="post" action=" {{route('admin.car.store.brand')}}" class="row d-flex justify-content-center">
+            <form method="post" action=" {{route('admin.car.store.brand')}}" class="row d-flex justify-content-center" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <h2 class="text-center">Dodaj samochód</h2>
@@ -21,6 +21,10 @@
                     <input name="model" type="text" class="form-control mt-3" placeholder="Model">
                     @if($errors->first('model'))
                         <p class="text-danger">{{ $errors->first('model') }}</p>
+                    @endif
+                    <input name="img" type="file" class="form-control mt-3">
+                    @if($errors->first('img'))
+                        <p class="text-danger">{{ $errors->first('img') }}</p>
                     @endif
                     <input name="year" type="date" class="form-control mt-3" placeholder="Data">
                     <label class="form-label" for="date">Data produkcji</label>

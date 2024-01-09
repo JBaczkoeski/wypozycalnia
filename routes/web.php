@@ -20,17 +20,23 @@ Route::get('/', function () {
 });
 
 Route::get('/logowanie', function () {
-   return view('auth.login');
+    return view('auth.login');
 });
 
 Route::get('/rejestracja', function () {
     return view('auth.register');
 });
 
-Route::get('/samochody', [CarsController::class, 'index'])->name('cars');
+Route::get('/informacja', function () {
+    return view('user.information');
+});
 
+Route::get('/samochod/{id}', [CarsController::class, 'show'])->name('car');
+
+Route::get('/samochody', [CarsController::class, 'index'])->name('cars');
+Route::get('/samochody/filtr', [CarsController::class, 'filterProducts'])->name('cars.filtr');
 //authentication
-Route::get('/konto',[AuthController::class, 'account'])->name('account');
+Route::get('/konto', [AuthController::class, 'account'])->name('account');
 Route::post('/rejestracja/utwórz', [AuthController::class, 'register'])->name('register');
 Route::get('/logowanie/zaloguj', [AuthController::class, 'login'])->name('login');
 Route::post('/konto/aktualizacja', [AuthController::class, 'update'])->name('account.update');
@@ -38,7 +44,7 @@ Route::post('/wyloguj', [AuthController::class, 'logout'])->name('logout');
 
 
 //Admin
-Route::get('/admin', function(){
+Route::get('/admin', function () {
     return view('admin.home');
 });
 
@@ -49,5 +55,6 @@ Route::post('/admin/samochody/marki/dodaj', [CarsController::class, 'storeBrand'
 Route::delete('/admin/samochody/marki/usun/{id}', [CarsController::class, 'deleteBrand'])->name('admin.delete.brand');
 Route::post('/admin/samochody/samochody/dodaj', [CarsController::class, 'storeCar'])->name('admin.car.store.brand');
 Route::get('/admin/samochody/zawies/{id}', [CarsController::class, 'carAvability'])->name('admin.car.avability');
+Route::get('/admin/samochody/usun/{id}', [CarsController::class, 'carDelete'])->name('admin.car.delete');
 
 
